@@ -20,7 +20,6 @@ SearchEng::SearchEng(PageParser* noExtensionParser)
     }
     //this->noExtensionParser_ = noExtensionParser;
     parsers_.insert(make_pair("", noExtensionParser));
-    // Add additional code if necessary
 
 }
 
@@ -33,17 +32,7 @@ SearchEng::~SearchEng(){
         }
     }
     //delete parsers
-    /*
-    if(textparser_ != NULL){
-        delete textparser_;
-    }
-    if(mdparser_ != NULL){
-        delete mdparser_;
-    }
-    if(noExtensionParser_ != NULL){
-        delete noExtensionParser_;
-    }
-*/
+
     std::map<string, PageParser*>::iterator i;
     for(i = parsers_.begin(); i != parsers_.end(); i++){
         delete i -> second;
@@ -169,7 +158,6 @@ WebPageSet SearchEng::search(const std::vector<std::string>& terms, WebPageSetCo
         for(unsigned int i = 1; i < terms.size(); i++){
             if(pagesWithTerms_.find(terms[i]) != pagesWithTerms_.end()){
                 combined = combiner -> combine(combined, pagesWithTerms_.find(terms[i]) -> second);
-                // causing segmentation fault
             }
             else{
                 WebPageSet blank;
@@ -188,13 +176,11 @@ WebPageSet SearchEng::search(const std::vector<std::string>& terms, WebPageSetCo
         combined = empty;
         for(unsigned int i = 1; i < terms.size(); i++){
             if(pagesWithTerms_.find(terms[i]) != pagesWithTerms_.end()){
-                combined = combiner -> combine(combined, pagesWithTerms_.find(terms[i]) -> second);
-                // causing segmentation fault    
+                combined = combiner -> combine(combined, pagesWithTerms_.find(terms[i]) -> second);  
             }
             else{
                 WebPageSet blank;
                 combined = combiner -> combine(combined, blank);
-                // causing segmentation fault
             }
         }
         for(WebPage* p : combined){
@@ -213,14 +199,7 @@ WebPageSet SearchEng::search(const std::vector<std::string>& terms, WebPageSetCo
 
 
 void SearchEng::register_parser(const std::string& extension, PageParser* parser){
-    /*
-    if(extension == "txt"){
-        textparser_ = parser;
-    }
-    else if(extension == "md"){
-        mdparser_ = parser;
-    }
-*/
+
     if(parsers_.find(extension) == parsers_.end()){
         parsers_.insert(make_pair(extension, parser));
     }
@@ -255,29 +234,14 @@ WebPage* SearchEng::retrieve_page(const std::string& page_name) const {
 
 void SearchEng::display_page(std::ostream& ostr, const std::string& page_name) const {
     //check for exceptions
-    /*
-    if(extract_extension(page_name) != "txt" && extract_extension(page_name) != "md" && extract_extension(page_name) != ""){
-        throw std::logic_error("No parser registered to file extension.1");
-    }
-    */
+
     if(parsers_.find(extract_extension(page_name)) == parsers_.end()){
         throw std::logic_error("No parser registered to file extension.1");
     }
     if(webpages_.find(page_name) == webpages_.end()){
         throw std::invalid_argument("File name doesn't exist (display_page).");
     }
-    /*
-    //use appropriate parser to display text
-    if(extract_extension(page_name) == "txt"){
-        ostr << textparser_ -> display_text(page_name);
-    }
-    else if(extract_extension(page_name) == "md"){
-        ostr << mdparser_ -> display_text(page_name);
-    }
-    else{
-        ostr << noExtensionParser_ -> display_text(page_name);
-    }
-    */
+
     ostr << parsers_.find(extract_extension(page_name)) -> second -> display_text(page_name);
 }
 
@@ -294,17 +258,7 @@ void SearchEng::read_page(const std::string& filename){
         std::set<string> allSearchableTerms;
         std::set<string> allOutgoingLinks;
         //parse with appropriate parser
-        /*
-        if(extract_extension(filename) == "md"){
-            mdparser_ -> parse(filename, allSearchableTerms, allOutgoingLinks);
-        }
-        else if(extract_extension(filename) == "txt"){
-            textparser_ -> parse(filename, allSearchableTerms, allOutgoingLinks);
-        }
-        else{
-            noExtensionParser_ -> parse(filename, allSearchableTerms, allOutgoingLinks);
-        }
-        */
+
         parsers_.find(extract_extension(filename)) -> second -> parse(filename, allSearchableTerms, allOutgoingLinks);
         allTerms = allSearchableTerms;
         page -> all_terms(allSearchableTerms);
@@ -335,17 +289,7 @@ void SearchEng::read_page(const std::string& filename){
         std::set<string> allSearchableTerms;
         std::set<string> allOutgoingLinks;
         //parse with appropriate parser
-        /*
-        if(extract_extension(filename) == "md"){
-            mdparser_ -> parse(filename, allSearchableTerms, allOutgoingLinks);
-        }
-        else if(extract_extension(filename) == "txt"){
-            textparser_ -> parse(filename, allSearchableTerms, allOutgoingLinks);
-        }
-        else{
-            noExtensionParser_ -> parse(filename, allSearchableTerms, allOutgoingLinks);
-        }
-        */
+
         parsers_.find(extract_extension(filename)) -> second -> parse(filename, allSearchableTerms, allOutgoingLinks);
         existingPage -> all_terms(allSearchableTerms);
         allTerms = allSearchableTerms;
