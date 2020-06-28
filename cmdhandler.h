@@ -3,7 +3,7 @@
 #include "handler.h"
 #include "searcheng.h"
 #include "combiners.h"
-#include "../mergesort/msort.h"
+#include "msort.h"
 
 
 class QuitHandler : public Handler
