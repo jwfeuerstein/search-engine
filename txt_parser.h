@@ -8,9 +8,7 @@
 
 class TXTParser : public PageParser {
 public:
-    /**
-     * See documentation in PageParser class
-     */
+
     void parse(std::string filename,
                std::set<std::string>& allSearchableTerms,
                std::set<std::string>& allOutgoingLinks);
@@ -20,14 +18,11 @@ public:
         std::string filename,
         std::set<std::string>& processed,
         std::ostream& ofile);
-    
-    /**
-     * See documentation in PageParser class
-     */
+
     std::string display_text(std::string filename);
 
 private:
-    // You may add additional private helpers or data members below
+
 
 };
 
