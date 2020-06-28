@@ -1,8 +1,6 @@
 #include "searcheng.h"
 #include "combiners.h"
 
-// Place your function implementations for your derived
-// WebPageSetCombiner classes here
 
 WebPageSet ANDWebPageSetCombiner::combine(const WebPageSet& setA, const WebPageSet& setB){
 	 
