@@ -1,11 +1,6 @@
 #include <vector>
 
-/**
- * Performs mergesort on the provided vector using
- * the Compare object, comp, to peform ALL comparisons
- *
- * Must run in O(n*log(n))
- */
+
 template <class T, class Compare >
 void mergeSort(std::vector<T>& list, Compare comp);
 
