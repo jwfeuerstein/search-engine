@@ -13,19 +13,12 @@ SearchUI::SearchUI(SearchEng* eng)
     this->handlers_ = NULL;
 }
 
-/**
- * Destructor
- */
+
 SearchUI::~SearchUI() {
     delete handlers_;
 }
 
-/**
- *  Add a command handler
- *
- *  @param[in] handler
- *     Pointer to the handler for a particular command.
- */
+
 void SearchUI::add_handler(Handler* handler)
 {
     handler->set_next(handlers_);
