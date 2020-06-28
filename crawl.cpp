@@ -16,8 +16,7 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    // ---------------------- [TO BE COMPLETED] -------------------------------
-    // create map with parser
+
     map<string, PageParser*> parsers;
     PageParser* MDparser = new MDParser;
     PageParser* TXTparser = new TXTParser;
@@ -50,7 +49,6 @@ int main(int argc, char* argv[])
     ifile.close();
     ofile.close();
     
-    // You may add cleanup code here if necessary
     // delete parsers
     map<string, PageParser*>::iterator it;
     for(it = parsers.begin(); it != parsers.end(); it++){
