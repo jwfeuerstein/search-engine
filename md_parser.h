@@ -9,10 +9,7 @@
 
 class MDParser : public PageParser {
 public:
-    /**
-     * See documentation in PageParser class
-     * [TO BE COMPLETED]
-     */
+
     void parse(std::string filename,
                std::set<std::string>& allSearchableTerms,
                std::set<std::string>& allOutgoingLinks);
@@ -25,14 +22,10 @@ public:
 
     bool getLinks(std::string filename, std::vector<std::string>& linkOrder);
 
-    /**
-     * See documentation in PageParser class
-     * [COMPLETED]
-     */
+
     std::string display_text(std::string filename);
 
 private:
-    // You may add additional private helpers or data members below
 
 };
 
