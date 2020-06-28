@@ -3,8 +3,6 @@
 
 #include "wpscombiner.h"
 
-/*** Define Derived WebPageSetCombiners (for AND, OR, DIFF) classes below ***/
-
 class ANDWebPageSetCombiner : public WebPageSetCombiner
 {
 public:
